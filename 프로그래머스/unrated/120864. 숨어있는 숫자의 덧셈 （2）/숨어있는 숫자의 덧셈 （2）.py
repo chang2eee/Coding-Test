@@ -10,7 +10,7 @@ def solution(my_string):
                 answer += int(temp)
                 temp = ''
     
-    if temp:  # 마지막으로 처리되지 않은 temp가 있는지 확인
+    if temp: 
         answer += int(temp)
 
     return answer
