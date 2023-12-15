@@ -1,19 +1,23 @@
 def solution(arr):
-    idx = 0
-    prev = arr
-    
+    answer = 0
+    temp = set()
+
     while True:
-        change = []
-        for i in prev:
-            if i >= 50 and i % 2 == 0: change.append(int(i / 2))
-            elif i < 50 and i % 2 == 1: change.append(i * 2 + 1)
-            else: change.append(i)
+        container = []
 
-        same = all(a == b for a, b in zip(prev, change))
-        if same:
+        for element in arr:
+            if element >= 50 and element % 2 == 0:
+                container.append(element / 2)
+            elif element < 50 and element % 2 == 1:
+                container.append(element * 2 + 1)
+
+        container.sort()
+        arr = container  # Update arr with the new container
+
+        if tuple(arr) in temp:
             break
-        idx += 1
 
-        prev = change
-    
-    return idx
+        temp.add(tuple(arr))
+        answer += 1
+
+    return answer - 1
