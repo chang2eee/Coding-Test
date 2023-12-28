@@ -1,16 +1,18 @@
 def solution(arr):
+    answer = []
+    length = len(arr)
+    
+    for i in range(getNumber(length) - length):
+        arr.append(0)
+    
     answer = arr.copy()
-    
-    for i in range(getNumber(len(arr)) - len(arr)):
-        answer.append(0)
-    
+
     return answer
 
 def getNumber(number):
-    i = 1
     result = 1
     
     while result < number:
         result *= 2
-    
+        
     return result
