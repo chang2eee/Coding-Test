@@ -1,6 +1,6 @@
 # [level unrated] 조건에 맞게 수열 변환하기 2 - 181881 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181881#) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181881) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 12월 6일 2:49:25
+2023년 12월 4일 15:30:12
 
 ### 문제 설명
 

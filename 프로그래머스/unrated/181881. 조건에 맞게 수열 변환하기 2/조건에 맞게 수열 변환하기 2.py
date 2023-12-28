@@ -12,7 +12,7 @@ def solution(arr):
                 container.append(element * 2 + 1)
 
         container.sort()
-        arr = container  # Update arr with the new container
+        arr = container
 
         if tuple(arr) in temp:
             break
