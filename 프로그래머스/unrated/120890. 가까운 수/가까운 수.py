@@ -1,15 +1,16 @@
 def solution(array, n):
     answer = 0
+    
     dic = dict()
     
     for element in array:
-        dic[element] = abs(n - element)
+        dic[element] = abs(element - n)
         
-    dic = list(dic.items())
-    dic = sorted(dic, key=lambda x: x[1])
+    dic = sorted(dic.items(), key=lambda x:x[1])
+    
+    temp = []
     
     min_value = dic[0][1]
-    temp = []
     
     for key, value in dic:
         if value == min_value:
