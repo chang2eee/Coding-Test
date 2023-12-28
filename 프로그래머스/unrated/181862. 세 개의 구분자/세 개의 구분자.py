@@ -1,20 +1,21 @@
 def solution(myStr):
     answer = []
-    target = ['a', 'b', 'c']
+    
+    splitter = ['a', 'b', 'c']
     temp = ''
-
+    
     for element in myStr:
-        if element not in target:
-            temp += element
-        else:
-            if temp:  
+        if element in splitter:
+            if temp:
                 answer.append(temp)
                 temp = ''
-
+        else:
+            temp += element
+    
     if temp:
         answer.append(temp)
+    
+    if not answer:
+        answer.append('EMPTY')
         
-    if len(answer) == 0:
-        answer = ["EMPTY"]
-
     return answer
