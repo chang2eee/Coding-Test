@@ -4,13 +4,13 @@ def solution(my_string):
     
     for element in my_string:
         if element.isdigit():
-            temp += str(element)
+            temp += element
         else:
-            if temp:
+            if len(temp) != 0:  
                 answer += int(temp)
                 temp = ''
     
-    if temp: 
+    if len(temp) != 0:
         answer += int(temp)
-
+                
     return answer
