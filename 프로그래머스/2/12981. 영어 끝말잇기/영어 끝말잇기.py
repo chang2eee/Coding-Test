@@ -1,15 +1,19 @@
 def solution(n, words):
     answer = [0, 0]
-    used_words = set()  
-    stack = []  
     
+    player_dict = dict()
+
+    for i in range(n):
+        player_dict[i] = []
+    
+    stack = []
+
     for idx, word in enumerate(words):
-        if idx > 0 and (words[idx - 1][-1] != word[0] or word in used_words):
-            # 이전 단어의 끝말과 맞지 않거나 이미 사용한 단어인 경우
-            answer = [(idx % n) + 1, (idx // n) + 1]
-            return answer
-        
-        stack.append(word)  
-        used_words.add(word)  
+        if word not in stack and (not stack or word[0] == stack[-1][-1]):
+            stack.append(word)
+            player_dict[idx % n].append(word)
+        else:
+            answer = [idx % n + 1, len(player_dict[idx % n]) + 1]
+            break
     
     return answer
