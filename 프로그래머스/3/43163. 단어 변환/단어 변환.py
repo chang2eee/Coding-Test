@@ -17,4 +17,10 @@ def solution(begin, target, words):
     return 0  
 
 def can_convert(word1, word2):
-    return sum(1 for a, b in zip(word1, word2) if a != b) == 1
+    count = 0
+    
+    for a, b in zip(word1, word2):
+        if a != b:
+            count += 1
+    
+    return count == 1
