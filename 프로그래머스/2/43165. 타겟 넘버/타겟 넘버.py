@@ -1,15 +1,22 @@
+answer = 0
+
 def solution(numbers, target):
-    answer = 0
-    leaves = [0]
-    for num in numbers:
-        tmp = []
-        for parent in leaves:
-            tmp.append(parent + num)
-            tmp.append(parent - num)
-        leaves = tmp
-        
-    for leaf in leaves:
-        if leaf == target:
-            answer += 1
+    global answer
+    
+    dfs(0, numbers, target, 0)
     
     return answer
+
+def dfs(idx, numbers, target, value):
+    global answer
+    
+    if idx == len(numbers):
+        if value == target:
+            answer += 1
+            return 
+        else:
+            return 
+    
+    else:
+        dfs(idx+1, numbers, target, value + numbers[idx])
+        dfs(idx+1, numbers, target, value - numbers[idx])
