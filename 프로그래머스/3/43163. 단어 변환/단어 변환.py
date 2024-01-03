@@ -1,17 +1,19 @@
 from collections import deque
 
 def solution(begin, target, words):
+    n = len(words)
+    visited = [False] * n
+    
     queue = deque([(begin, 0)]) 
-    visited = set() 
     
     while queue:
         current, depth = queue.popleft()
         if current == target:
             return depth
 
-        for word in words:
-            if word not in visited and can_convert(current, word):
-                visited.add(word)
+        for i, word in enumerate(words):
+            if not visited[i] and can_convert(current, word):
+                visited[i] = True
                 queue.append((word, depth + 1))
 
     return 0  
