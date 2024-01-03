@@ -1,18 +1,25 @@
 answer = 0
 
-def solution(k, dungeons):
-    
-    check = [False] * len(dungeons)
-    dfs(k, 0, dungeons, check)
-    
-    return answer
-
-def dfs(k, cnt, dungeons, check):
+def dfs(k, dungeons, count, visited):
     global answer
-    answer = max(answer, cnt)
+    
+    answer = max(answer, count)
     
     for i in range(len(dungeons)):
-        if check[i] == False and k >= dungeons[i][0]:
-            check[i] = True
-            dfs(k - dungeons[i][1], cnt + 1, dungeons, check)
-            check[i] = False
+        if visited[i] == False and k >= dungeons[i][0]:
+            visited[i] = True
+            dfs(k - dungeons[i][1], dungeons, count + 1, visited)
+        
+            visited[i] = False
+    
+    
+    
+
+def solution(k, dungeons):
+    global answer
+    
+    visited = [False] * len(dungeons)
+    
+    dfs(k, dungeons, 0, visited)
+    
+    return answer
