@@ -26,3 +26,4 @@ def can_convert(word1, word2):
             count += 1
     
     return count == 1
+ 
