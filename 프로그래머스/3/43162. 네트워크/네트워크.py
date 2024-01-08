@@ -9,6 +9,8 @@ def solution(n, computers):
             if idx != i and computers[idx][i] == 1:
                 graph[str(idx)].append(str(i))
     
+    print(graph)
+    
     visited = [False] * len(computers)
     
     for node in graph:
