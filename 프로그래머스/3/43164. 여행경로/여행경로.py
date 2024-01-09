@@ -1,3 +1,5 @@
+from collections import deque
+
 def solution(tickets):
     routes = dict()
 
@@ -7,24 +9,54 @@ def solution(tickets):
             routes[departure] = [arrival]
         else:
             routes[departure].append(arrival)
-            routes[departure].sort(reverse=True)  
+            routes[departure].sort(reverse=True)
 
     answer = []
 
-    stack = ['ICN']
+    queue = deque(['ICN'])
 
-    while stack:
-        current_airport = stack[-1]
+    while queue:
+        current_airport = queue[-1]
 
         if current_airport in routes and routes[current_airport]:
             next_airport = routes[current_airport].pop()
-            stack.append(next_airport)
+            queue.append(next_airport)
         else:
-            answer.append(stack.pop())
+            answer.append(queue.pop())
 
     answer.reverse()
 
     return answer
+
+
+
+# def solution(tickets):
+#     routes = dict()
+
+#     for ticket in tickets:
+#         departure, arrival = ticket
+#         if departure not in routes:
+#             routes[departure] = [arrival]
+#         else:
+#             routes[departure].append(arrival)
+#             routes[departure].sort(reverse=True)  
+
+#     answer = []
+
+#     stack = ['ICN']
+
+#     while stack:
+#         current_airport = stack[-1]
+
+#         if current_airport in routes and routes[current_airport]:
+#             next_airport = routes[current_airport].pop()
+#             stack.append(next_airport)
+#         else:
+#             answer.append(stack.pop())
+
+#     answer.reverse()
+
+#     return answer
 
 
 
