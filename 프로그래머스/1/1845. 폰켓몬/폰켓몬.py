@@ -1,12 +1,15 @@
+from collections import Counter
+
 def solution(nums):
-    count = 0
-    size_count = {}
-    for size in nums:
-        if size in size_count:
-            size_count[size] += 1
-        else:
-            size_count[size] = 1
-    sorted_counts = sorted(size_count.values(), reverse=True)
-    you_take = int(sum(sorted_counts)/2)
-    answer = min(you_take,len(sorted_counts))
+    answer = 0
+    
+    pokemon_counter = Counter(nums)
+    take_amount = len(nums) // 2
+    pokemon_kind = len(pokemon_counter.keys())
+    
+    if pokemon_kind > take_amount:
+        answer = take_amount
+    else:
+        answer = pokemon_kind
+    
     return answer
