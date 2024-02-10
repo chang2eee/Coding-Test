@@ -3,20 +3,17 @@ answer = 0
 def solution(numbers, target):
     global answer
     
-    dfs(0, numbers, target, 0)
+    dfs(numbers, target, 0, 0)
     
     return answer
 
-def dfs(idx, numbers, target, value):
+def dfs(numbers, target, index, current_value):
     global answer
     
-    if idx == len(numbers):
-        if value == target:
+    if index == len(numbers):
+        if current_value == target:
             answer += 1
-            return 
-        else:
-            return 
-    
+        return
     else:
-        dfs(idx+1, numbers, target, value + numbers[idx])
-        dfs(idx+1, numbers, target, value - numbers[idx])
+        dfs(numbers, target, index+1, current_value - numbers[index])
+        dfs(numbers, target, index+1, current_value + numbers[index])
