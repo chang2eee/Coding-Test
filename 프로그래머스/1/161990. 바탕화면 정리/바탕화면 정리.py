@@ -1,13 +1,15 @@
 def solution(wallpaper):
-    answer = [51, 51, 0, 0]
-    lux, luy, rdx, rdy= 0, 1, 2, 3
+    answer = []
     
-    for i, elements in enumerate(wallpaper):
-        for j, element in enumerate(elements):
-            if element == '#':
-                answer[lux] = min(answer[lux], i)
-                answer[luy] = min(answer[luy], j)
-                answer[rdx] = max(answer[rdx], i+1)
-                answer[rdy] = max(answer[rdy], j+1)
+    temp_x, temp_y = [], []
+    
+    for col in range(len(wallpaper)):
+        for row in range(len(wallpaper[0])):
+            if wallpaper[col][row] == '#':
+                temp_x.append(col)
+                temp_y.append(row)
                 
+    answer = [min(temp_x), min(temp_y), max(temp_x)+1, max(temp_y)+1]
+    
+    
     return answer
