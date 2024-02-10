@@ -1,31 +1,28 @@
 def solution(n, computers):
     answer = 0
     
-    graph = dict()
+    network = dict()
     
-    for idx in range(len(computers)):
-        graph[str(idx)] = []
-        for i in range(len(computers[idx])):
-            if idx != i and computers[idx][i] == 1:
-                graph[str(idx)].append(str(i))
-    
-    print(graph)
+    # 그래프로 만들기 (딕셔너리 이용)
+    for idx, computer in enumerate(computers):
+        network[idx] = []
+        for i in range(len(computer)):
+            if idx != i and computer[i] == 1:
+                network[idx].append(i)
     
     visited = [False] * len(computers)
     
-    for node in graph:
-        if not visited[int(node)]:
-            dfs(graph, int(node), visited)
+    for node in network:
+        if visited[node] == False:
+            dfs(network, node, visited)
             answer += 1
+    
     
     return answer
 
-def dfs(graph, start, visited):
+def dfs(network, start, visited):
     visited[start] = True
     
-    for neighbor in graph[str(start)]:
-        if visited[int(neighbor)] == False:
-            dfs(graph, int(neighbor), visited)
-    
-    
-    
+    for neighbor in network[start]:
+        if visited[neighbor] == False:
+            dfs(network, neighbor, visited)
