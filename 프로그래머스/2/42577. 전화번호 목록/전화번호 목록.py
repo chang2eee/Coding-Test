@@ -3,7 +3,7 @@ from collections import Counter
 def solution(phone_book):
     answer = True
     
-    phone_book.sort()
+    phone_book.sort(key=lambda x:len(x))
     
     phone_book_counter = Counter(phone_book)    
     
