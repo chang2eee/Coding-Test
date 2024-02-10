@@ -3,13 +3,15 @@ from collections import Counter
 def solution(participant, completion):
     answer = ''
     
-    participant_counter = Counter(participant)
-    completion_counter = Counter(completion)
+    participant_counter, completion_counter = Counter(participant), Counter(completion)
     
-    for key in completion_counter.keys():
-        participant_counter[key] -= completion_counter[key]
-        
     for key, value in participant_counter.items():
-        if value > 0:
+        if value != completion_counter[key]:
             answer = key
-            return answer
+            break
+        
+        if key not in completion_counter:
+            answer = key
+            break
+    
+    return answer
