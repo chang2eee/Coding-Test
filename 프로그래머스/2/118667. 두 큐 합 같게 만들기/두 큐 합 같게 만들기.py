@@ -12,7 +12,7 @@ def solution(queue1, queue2):
         return 0
     elif (sum1 + sum2) % 2 == 1:
         return -1
-
+    
     while True:
         if sum1 > sum2:
             temp = queue1.popleft()
