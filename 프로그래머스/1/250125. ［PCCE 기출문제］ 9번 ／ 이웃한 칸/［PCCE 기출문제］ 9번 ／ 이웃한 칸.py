@@ -13,13 +13,13 @@ def solution(board, h, w):
     queue = deque([(h, w)])
     
     while queue:
-        x, y = queue.popleft()
+        y, x = queue.popleft()
         
         for i in range(4):
             next_x = x + dx[i]
             next_y = y + dy[i]
             
-            if 0 <= next_x < width and 0 <= next_y < height and board[next_x][next_y] == target:
+            if 0 <= next_x < width and 0 <= next_y < height and board[next_y][next_x] == target:
                 answer += 1
     
     
