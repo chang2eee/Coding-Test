@@ -5,6 +5,9 @@ def solution(numbers, target):
     
     dfs(numbers, target, 0, 0)
     
+    
+    
+    
     return answer
 
 def dfs(numbers, target, index, current_value):
