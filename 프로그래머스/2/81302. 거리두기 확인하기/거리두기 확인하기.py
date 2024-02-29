@@ -1,45 +1,45 @@
 from collections import deque
 
-def bfs(p):
-    start = []
+def bfs(place):
+    people = []
     
-    for i in range(5): # 시작점이 되는 P 좌표 구하기
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    
+    for i in range(5):
         for j in range(5):
-            if p[i][j] == 'P':
-                start.append([i, j])
+            if place[i][j] == 'P':
+                people.append((i, j))
     
-    for s in start:
-        queue = deque([s])  # 큐에 초기값
-        visited = [[0]*5 for i in range(5)]   # 방문 처리 리스트
-        distance = [[0]*5 for i in range(5)]  # 경로 길이 리스트
-        visited[s[0]][s[1]] = 1
+    for person in people:
+        queue = deque([person])
+        
+        visited = [[False] * 5 for _ in range(5)]
+        distance = [[0] * 5 for _ in range(5)]
+        
+        visited[person[0]][person[1]] = True
         
         while queue:
             y, x = queue.popleft()
-        
-            dx = [-1, 1, 0, 0]  # 좌우
-            dy = [0, 0, -1, 1]  # 상하
-
+            
             for i in range(4):
-                nx = x + dx[i]
-                ny = y + dy[i]
-
-                if 0<=nx<5 and 0<=ny<5 and visited[ny][nx] == 0:
+                next_y = y + dy[i]
+                next_x = x + dx[i]
+                
+                if 0 <= next_y < 5 and 0 <= next_x < 5 and not visited[next_y][next_x]:
+                    visited[next_y][next_x] = True
+                    distance[next_y][next_x] = distance[y][x] + 1
                     
-                    if p[ny][nx] == 'O':
-                        queue.append([ny, nx])
-                        visited[ny][nx] = 1
-                        distance[ny][nx] = distance[y][x] + 1
-                    
-                    if p[ny][nx] == 'P' and distance[y][x] <= 1:
+                    if place[next_y][next_x] == 'P' and distance[next_y][next_x] <= 2:
                         return 0
+                    elif place[next_y][next_x] == 'O':
+                        queue.append((next_y, next_x))
     return 1
-
 
 def solution(places):
     answer = []
     
-    for i in places:
-        answer.append(bfs(i))
+    for place in places:
+        answer.append(bfs(place))
     
     return answer
