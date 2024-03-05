@@ -3,16 +3,14 @@ from collections import Counter
 def solution(nums):
     answer = 0
     
-    pokemon_counter = Counter(nums)
-    take_amount = len(nums) // 2
+    pokemon = Counter(nums)
     
-    pokemon_kind = len(pokemon_counter.keys())
+    pokemon_type, take_amount = len(pokemon), len(nums) // 2
     
-    if pokemon_kind > take_amount:
-        answer = take_amount
+    if take_amount <= pokemon_type:
+        return take_amount
     else:
-        answer = pokemon_kind
-    
+        return pokemon_type
     
     
     return answer
