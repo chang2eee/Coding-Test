@@ -1,55 +1,64 @@
 from collections import deque
 
-def bfs(start, end, maps):
-	# 탐색할 방향
-    dy = [0, 1, -1, 0]
-    dx = [1, 0, 0, -1]
+def bfs(maps, start, end):
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
     
-    n = len(maps)       # 세로
-    m = len(maps[0])    # 가로
-    visited = [[False]*m for _ in range(n)]
-    que = deque()
-    flag = False
+    # 시작점
+    start_y, start_x = 0, 0
     
-    # 초깃값 설정
-    for i in range(n):
-        for j in range(m):
-        	# 출발하고자 하는 지점이라면 시작점의 좌표를 기록함
-            if maps[i][j] == start:      
-                que.append((i, j, 0))    
-                # 별도의 cost 리스트를 만들지 않고 que에 바로 기록(0)
-                visited[i][j] = True
-                flag = True; break 
-                # 시작 지점은 한 개만 존재하기 때문에 찾으면 바로 나옴
-        if flag: break
+    # 탈출지점 / 레버위치
+    end_y, end_x = 0, 0
+    
+    for i in range(len(maps)):
+        for j in range(len(maps[0])):
+            if maps[i][j] == start:
+                start_y, start_x = i, j
+            if maps[i][j] == end:
+                end_y, end_x = i, j
                 
-    # BFS 알고리즘 수행 (핵심)
-    while que:
-        y, x, cost = que.popleft()
-        
-        if maps[y][x] == end:
-            return cost
-        
-        for i in range(4):
-            ny = y + dy[i]
-            nx = x + dx[i]
-            
-            # maps 범위내에서 벽이 아니라면 지나갈 수 있음
-            if 0<= ny <n and 0<= nx <m and maps[ny][nx] !='X':
-                if not visited[ny][nx]:	# 아직 방문하지 않는 통로라면
-                    que.append((ny, nx, cost+1))
-                    visited[ny][nx] = True
-                    
-    return -1	# 탈출할 수 없다면
-        
-            
-def solution(maps):
-    path1 = bfs('S', 'L', maps)	
-    path2 = bfs('L', 'E', maps) 
+    # 방문여부 확인 
+    visited = [[False] * len(maps[0]) for _ in range(len(maps))]
     
-    # 둘다 -1 이 아니라면 탈출할 수 있음
+    # 이동거리
+    distance = 0
+    
+    queue = deque([(start_y, start_x, distance)])
+    
+    # 방문할 곳 남아있을 시
+    while queue:
+        y, x, distance = queue.popleft()
+        
+        # 탈출조건
+        if y == end_y and x == end_x:
+            return distance
+        
+        # 탈출 불가
+        for i in range(4):
+            # 추가방문
+            next_y = y + dy[i]
+            next_x = x + dx[i]
+            
+            # 다음 방문할 장소가 maps 내부에 위치하는지 확인 and 막혀있는 길이 아닌지 확인
+            if 0 <= next_y <= len(maps)-1 and 0 <= next_x <= len(maps[0])-1 and maps[next_y][next_x] != 'X':
+                # 방문한 기록 없음
+                if visited[next_y][next_x] == False:
+                    queue.append((next_y, next_x, distance+1))
+                    visited[next_y][next_x] = True
+    
+    
+    return -1
+
+def solution(maps):
+    # 레버 먼저 건드리기
+    path1 = bfs(maps, 'S', 'L')
+    
+    # 레버 건드린 후 탈출시도
+    path2 = bfs(maps, 'L', 'E')
+
+    
+    # 둘 다 길이 존재
     if path1 != -1 and path2 != -1:
         return path1 + path2
-        
-   	# 둘중 하나라도 -1 이면 탈출할 수 없음
+    
     return -1
