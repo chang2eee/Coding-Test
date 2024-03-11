@@ -1,15 +1,15 @@
 def solution(data, col, row_begin, row_end):
     answer = 0
-
-    data.sort(key=lambda x:[x[col-1],-x[0]])
-
-    for i in range(row_begin,row_end+1):
+    
+    # 람다키 정렬 다시 한 번 확인하기
+    # 내림차순의 역은 오름차순
+    data.sort(key=lambda x:[x[col-1], -x[0]])
+    
+    for i in range(row_begin, row_end+1):
         result = 0
         for j in data[i-1]:
             result += j % i
             
-        answer = answer ^ result
-        
-        
-        
+        answer ^= result
+    
     return answer
