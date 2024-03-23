@@ -2,19 +2,17 @@ from heapq import *
 
 def solution(scoville, K):
     answer = 0
-    scoville.sort()
+    heapify(scoville)
     
-    while scoville[0] < K and len(scoville) > 1:
+    while scoville[0] < K and len(scoville) >= 2:
         small = heappop(scoville)
         big = heappop(scoville)
         
-        new = small + 2 * big
-        
-        heappush(scoville, new)       
+        heappush(scoville, 2*big+small)
         
         answer += 1
     
-    if scoville[0] >= K:
-        return answer
-    else:
+    if scoville[0] < K:
         return -1
+    
+    return answer
