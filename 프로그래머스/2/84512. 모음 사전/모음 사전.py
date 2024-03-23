@@ -2,18 +2,17 @@ from itertools import product
 
 def solution(word):
     answer = 0
+    dictionary = []
     
-    result = []
-    
-    alphabet = ['A', 'E', 'I', 'O', 'U']
+    vowels = ['A', 'E', 'I', 'O', 'U']
     
     for i in range(1, 6):
-        temp = product(alphabet, repeat = i)    
+        temp = product(vowels, repeat=i)
         for element in temp:
-            result.append(''.join(element))
+            dictionary.append(''.join(element))
     
-    result.sort()
+    dictionary.sort()
     
-    answer = result.index(word) + 1
+    answer = dictionary.index(word)+1
     
     return answer
