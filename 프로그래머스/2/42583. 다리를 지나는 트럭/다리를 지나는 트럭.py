@@ -5,19 +5,19 @@ def solution(bridge_length, weight, truck_weights):
     bridge = deque([0] * bridge_length)
     truck_weights = deque(truck_weights)
     
-    currentWeight = 0
-    while len(truck_weights)!=0:
-        answer += 1
-
-        currentWeight -= bridge.popleft()
-
-        if currentWeight + truck_weights[0] <= weight:
-            currentWeight += truck_weights[0]
+    current =0
+    
+    while truck_weights:
+        answer += 1 # 시간도 어짜피 흐른다
+        
+        current -= bridge.popleft() # 어짜피 빼야함
+        if current + truck_weights[0] <= weight:    # 하나 더
+            current += truck_weights[0]
             bridge.append(truck_weights.popleft())
-
-        else: 
+        else:
             bridge.append(0)
+    answer += bridge_length # 마지막 트럭이 건너는 시간
             
-    answer += bridge_length
+            
     
     return answer
