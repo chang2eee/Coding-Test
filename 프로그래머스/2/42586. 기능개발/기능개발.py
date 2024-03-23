@@ -3,27 +3,26 @@ from math import ceil
 def solution(progresses, speeds):
     answer = []
     
-    progresses = [100 - progress for progress in progresses]
-    
+    progresses = [100 - p for p in progresses]
     remain = []
-    for progress, speed in zip(progresses, speeds):
-        remain.append(ceil(progress / speed))
-        
+    
+    for p, s in zip(progresses, speeds):
+        remain.append(ceil(p/s))
+    
     temp = []
     
-    for day in remain:
+    for element in remain:
         if len(temp) == 0:
-            temp.append(day)
+            temp.append(element)
         else:
-            if max(temp) >= day:
-                temp.append(day)
-            else:
+            if element <= max(temp):
+                temp.append(element)
+            else:   # element < max(temp)
                 answer.append(len(temp))
                 temp.clear()
-                temp.append(day)
-    
-    if len(temp) != 0:
+                temp.append(element)
+                
+    if temp:
         answer.append(len(temp))
-            
     
     return answer
