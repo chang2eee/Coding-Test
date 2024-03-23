@@ -1,21 +1,19 @@
 def solution(s):
-    answer = True
-    stack = []
-    
+    if s[0] == ')':
+        return False
+
+    temp = []
     for element in s:
-        if not stack:
-            stack.append(element)
+        if len(temp) == 0:
+            temp.append(element)
         else:
-            if element == ')':
-                if stack[-1] == '(':
-                    stack.pop()
-                else:
-                    stack.append(element)
+            if temp[-1] == '(' and element == ')':
+                temp.pop()
             else:
-                stack.append(element)
+                temp.append(element)
     
-    if stack:
-        answer = False
-    
-    
-    return answer
+    if len(temp) != 0:
+        return False
+
+
+    return True
