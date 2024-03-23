@@ -1,16 +1,17 @@
 def solution(arr):
     answer = []
+    temp = []
     
-    for number in arr:
-        if not answer:
-            answer.append(number)
-            
+    for element in arr:
+        if len(temp) == 0:
+            answer.append(element)
+            temp.append(element)
         else:
-            if answer[-1] == number:
+            if element in temp:
                 continue
             else:
-                answer.append(number)
-    
-    
+                answer.append(element)
+                temp.clear()
+                temp.append(element)
     
     return answer
