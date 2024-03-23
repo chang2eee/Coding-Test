@@ -2,25 +2,29 @@ from itertools import permutations
 
 def solution(numbers):
     answer = 0
+    numbers = list(numbers)
+    container = set([int(n) for n in numbers])
     
-    num = []
-    for i in range(1, len(numbers)+1) :
-
-        num.append(list(set(map(''.join, permutations(numbers, i)))))
-    per = list(set(map(int, set(sum(num, [])))))
+    for i in range(2, len(numbers)+1):
+        temp = list(permutations(numbers, i))
+        for element in temp:
+            number = ''.join(element)
+            container.add(int(number))
+    print(container)
     
-    for p in per :
-        if is_prime_number(p) == True :
+    for element in container:
+        if check(element):
+            print(element)
             answer += 1
-
+    
     return answer
 
-def is_prime_number(x) :
-    if x < 2 :
+from math import sqrt
+
+def check(number):
+    if number <= 1:
         return False
-    
-    for i in range(2, x) :
-        if x % i == 0 :
+    for i in range(2, int(sqrt(number)) + 1):
+        if number % i == 0:
             return False
-            
     return True
