@@ -1,24 +1,30 @@
+from collections import Counter
+
 def solution(genres, plays):
     answer = []
     
-    playtime_dic = dict()
-    
-    for i in range(len(plays)):
-        if genres[i] not in playtime_dic:
-            playtime_dic[genres[i]] = [(plays[i], i)]  
+    temp_dic = dict()
+    for g, p in zip(genres, plays):
+        if g not in temp_dic:
+            temp_dic[g] = p
         else:
-            playtime_dic[genres[i]].append((plays[i], i))
+            temp_dic[g] += p
     
-    play_dic = dict()
+    temp_dic = sorted(temp_dic.items(), key=lambda x:x[1], reverse=True)
     
-    for key, value in playtime_dic.items():
-        play_dic[key] = sum(play[0] for play in value)
+    genres_plays_dic = dict()   # 장르, 노래 재생횟수
+    for i in range(len(genres)):
+        if genres[i] not in genres_plays_dic:
+            genres_plays_dic[genres[i]] = [(i, plays[i])]
+        else:
+            genres_plays_dic[genres[i]].append((i, plays[i]))
+            genres_plays_dic[genres[i]] = sorted(genres_plays_dic[genres[i]], key=lambda x:x[1], reverse=True)
     
-    play_dic = sorted(play_dic.items(), key=lambda x: x[1], reverse=True)
+    for element in temp_dic:
+        if len(genres_plays_dic[element[0]]) < 2:
+            answer.append(genres_plays_dic[element[0]][0][0])
+        else:
+            for i in range(2):
+                answer.append(genres_plays_dic[element[0]][i][0])
     
-    for element in play_dic:
-        key = element[0]
-        top_two = sorted(playtime_dic[key], key=lambda x: x[0], reverse=True)[:2]
-        answer.extend(idx for play, idx in top_two)
-
     return answer
