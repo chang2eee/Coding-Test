@@ -1,19 +1,15 @@
 def solution(clothes):
-    answer = 0
-    dic = dict()
+    answer = 1
+    closet = dict()
     
     for cloth in clothes:
-        if cloth[1] not in dic:
-            dic[cloth[1]] = [cloth[0]]
+        if cloth[1] not in closet:
+            closet[cloth[1]] = [cloth[0]]
         else:
-            dic[cloth[1]].append(cloth[0])
+            closet[cloth[1]].append(cloth[0])
     
-    temp = 1
+    for key, value in closet.items():
+        answer *= len(value) +1
     
-    for key, value in dic.items():
-        temp *= (len(dic[key]) + 1)
     
-        
-    answer = temp - 1
-    
-    return answer
+    return answer-1
