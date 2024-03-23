@@ -4,13 +4,11 @@ def solution(nums):
     answer = 0
     
     pokemon = Counter(nums)
+    take = len(nums) // 2
     
-    pokemon_type, take_amount = len(pokemon), len(nums) // 2
-    
-    if take_amount <= pokemon_type:
-        return take_amount
+    if take <= len(pokemon):
+        return take
     else:
-        return pokemon_type
-    
+        return len(pokemon)
     
     return answer
