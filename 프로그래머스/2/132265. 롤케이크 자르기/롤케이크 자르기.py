@@ -2,7 +2,6 @@ from collections import Counter
 
 def solution(topping):
     answer = 0
-    
     topping_counter = Counter(topping)
     left = set()
     
@@ -12,8 +11,8 @@ def solution(topping):
         
         if topping_counter[element] == 0:
             topping_counter.pop(element)
-        
-        if len(topping_counter) == len(left):
+            
+        if len(left) == len(topping_counter):
             answer += 1
     
     return answer
