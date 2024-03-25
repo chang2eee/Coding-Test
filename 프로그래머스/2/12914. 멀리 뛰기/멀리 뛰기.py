@@ -1,11 +1,13 @@
 def solution(n):
-    temp = dict()
+    if n == 1:
+        return 1
+    elif n == 2:
+        return 2
     
-    temp[0] = 1
-    temp[1] = 1
+    dp = [0] * n
+    dp[0], dp[1] = 1, 2
+    
+    for i in range(2, n):
+        dp[i] = dp[i-2] + dp[i-1]
         
-    for i in range(2, n+1):
-        temp[i] = temp[i-1] + temp[i-2]
-    
-    answer = temp[n] % 1234567    
-    return answer
+    return dp[n-1] % 1234567
