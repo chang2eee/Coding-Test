@@ -12,7 +12,8 @@ def solution(topping):
         if topping_counter[element] == 0:
             topping_counter.pop(element)
             
-        if len(left) == len(topping_counter):
+        if len(topping_counter) == len(left):
             answer += 1
+    
     
     return answer
